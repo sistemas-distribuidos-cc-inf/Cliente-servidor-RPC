@@ -17,7 +17,8 @@ func main() {
    fmt.Scanf("%s", &cpfString)
    args := &Args{Cpf: cpfString}
    var resposta bool
-    
+   
+   //estabelece a conexão
    cliente, erro := rpc.DialHTTP("tcp", "localhost:8080");
 
    if erro != nil {
@@ -25,6 +26,7 @@ func main() {
       os.Exit(1)
    }
 
+   //realiza a chamada da função
    erro = cliente.Call("Validador.ValidaCpf", args, &resposta)
    if erro != nil {
       log.Fatal("Erro chamando função: ", erro);
